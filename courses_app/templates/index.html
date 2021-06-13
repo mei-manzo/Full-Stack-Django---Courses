@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <title>Courses</title>
+</head>
+<body>
+    <h1>Add a new course</h1>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/shows/create" method='POST'>
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input class="name" type="name" name = "name">
+        <br><br>
+        <div class="description">
+            <p id="description">Description:</p><textarea name="description"></textarea>
+        </div>
+        <br><br>
+        <input type="submit" value="Add" id = "button">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for courses in all_courses %}
+            <tr>
+                <td> {{ courses.name }}</td>
+                <td>{{ courses.description }}</td>
+                <td>{{ courses.updated_at }}</td>
+                <td><a href = "https://stealthbits.com/blog/how-to-hide-api-keys-github/">Remove</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html> 
