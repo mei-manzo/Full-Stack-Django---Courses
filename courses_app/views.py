@@ -20,3 +20,14 @@ def create(request):
         return redirect('') 
     # return redirect('')
 
+def delete(request, id):
+    context = {
+        "all_courses": Course.objects.get(id=id)
+    }
+    return render(request, "delete.html", context)
+
+def destroy(request, id):
+    delete_show = Course.objects.get(id=id)
+    delete_show.delete()
+    return redirect('')
+

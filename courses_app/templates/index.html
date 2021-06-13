@@ -16,18 +16,18 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <form action="/shows/create" method='POST'>
+    <form action="/create" method='POST'>
         {% csrf_token %}
-        <label for="name">Name:</label>
+        <label for="name" id="name">Name:</label>
         <input class="name" type="name" name = "name">
         <br><br>
         <div class="description">
-            <p id="description">Description:</p><textarea name="description"></textarea>
+            <p id="description">Description:</p><textarea id="text" name="description"></textarea>
         </div>
         <br><br>
         <input type="submit" value="Add" id = "button">
     </form>
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <th>Course Name</th>
@@ -42,11 +42,11 @@
                 <td> {{ courses.name }}</td>
                 <td>{{ courses.description }}</td>
                 <td>{{ courses.updated_at }}</td>
-                <td><a href = "https://stealthbits.com/blog/how-to-hide-api-keys-github/">Remove</a></td>
+                <td><a href = "http://localhost:8000/courses/destroy/{{ courses.id }}">Remove</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    
+
 </body>
 </html> 
